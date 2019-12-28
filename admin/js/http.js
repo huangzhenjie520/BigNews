@@ -1,5 +1,23 @@
 /* 沙箱模式 */
-(function(w){
+/* 沙箱模式 */
+//     //token 令牌告诉服务器，当前是哪个用户要访问我数据
+//     //Authorization 翻译是授权的意思，值就为我们的token
+(function(window) {
+  const token = localStorage.getItem("token");
+  //   ajaxSetup() 方法为将来的 AJAX 请求设置默认值。
+  $.ajaxSetup({
+    beforeSend(xhr) {
+      if (!token) {
+        location.href = "./login.html";
+      }
+      if (location.href.indexOf("login.html") === -1) {
+        xhr.setRequestHeader("Authorization", token);
+      }
+    }
+  });
+})(window);
+
+/* (function(w){
     var baseURL = 'http://localhost:8080/api/v1'
     var BigNew = {
         baseURL:baseURL,//基地址
@@ -25,4 +43,4 @@
 
     //暴露接口
     w.BigNew = BigNew;
-})(window);
+})(window); */
