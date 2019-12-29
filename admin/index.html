@@ -12,6 +12,8 @@
 
     <script src="./libs/jquery-1.12.4.min.js"></script>
     <script src="./js/http.js"></script>
+    <script src="./js/user.js"></script>
+
     <!-- 导入bootstrap的js文件 -->
     <script src="./libs/bootstrap/js/bootstrap.min.js"></script>
   </head>
@@ -26,8 +28,8 @@
       </div>
       <!-- 左侧导航栏 -->
       <div class="menu">
-        <div class="level01 active">
-          <a href="#" target="main_frame"
+        <div class="level01">
+          <a href="index.html" target="main_frame"
             ><i class="iconfont icon-yidiandiantubiao04"></i
             ><span>首页</span></a
           >
@@ -92,14 +94,17 @@
     </div>
     <script src="./js/http.js"></script>
     <script>
+      $("#user").on("click", function() {
+        this.trigger("active");
+      });
+
       $(function() {
         const token = localStorage.getItem("token");
         $.ajax({
           url: newUrl.user_info,
           // headers: { Authorization: token },
           success: function(response) {
-            console.log(response);
-
+            // console.log(response);
             const userPic = response.data.userPic;
             const nickname = response.data.nickname;
             $(".user_info img,.user_center_link img").attr("src", userPic);
