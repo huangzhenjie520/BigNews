@@ -35,7 +35,7 @@
           >
         </div>
         <div class="level01">
-          <a href="article_list.html"
+          <a href="#"
             ><i class="iconfont icon-icon-article"></i><span>文章管理</span
             ><b class="iconfont icon-arrowdownl"></b
           ></a>
@@ -75,7 +75,12 @@
       <!-- 顶部栏 -->
       <div class="header_bar">
         <div class="user_center_link">
-          <a href="./user.html" target="main_frame">个人中心</a>
+          <a
+            href="./user.html"
+            target="main_frame"
+            onclick="$('#user').trigger('click')"
+            >个人中心</a
+          >
           <img src="images/2.jpg" alt="person" />
           <a href="javascript:void(0)" class="logout"
             ><i class="iconfont icon-tuichu"></i> 退出</a
@@ -94,9 +99,15 @@
     </div>
     <script src="./js/http.js"></script>
     <script>
-      $("#user").on("click", function() {
-        this.trigger("active");
+      $(".level01").on("click", function() {
+        $(this)
+          .addClass("active")
+          .siblings()
+          .removeClass("active");
       });
+      // $(".user_center_link").on("click", function() {
+      //   $("#user").addClass("active");
+      // });
 
       $(function() {
         const token = localStorage.getItem("token");

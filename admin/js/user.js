@@ -4,20 +4,34 @@ $(function() {
     type: "get",
     url: newUrl.user_detail,
     success: function(response) {
-      const userName = $("#inputEmail1").val(response.data.username);
-      const nickName = $("#inputEmail2").val(response.data.nickname);
-      const email = $("#inputEmail3").val(response.data.email);
-      const userPic = $(".user_pic").attr("src", response.data.userPic);
-      const passWord = $("#inputEmail4").val(response.data.password);
+      // $('[name="username"]').val(response.data.username);
+      // $('[name="nickname"]').val(response.data.nickname);
+      // $('[name="email"]').val(response.data.email);
+      // $(".user_pic").attr("src", response.data.userPic);
+      // $('[name="password"]').val(response.data.password);
+      const data = response.data;
+      const code = response.code;
+      if (code === 200) {
+        $.each(data, function(key, value) {
+          if (key !== "userPic") {
+            $(`[name='${key}']`).val(value);
+          }
+          // console.log(key, value);
+        });
+        $(".user_pic").attr("src", data.userPic);
+      }
       console.log(response);
     }
   });
   //2.文件预览
-
+  let url;
   // 固定的四个步骤
   $("#exampleInputFile").change(function() {
-    var file = this.files[0];
-    var url = URL.createObjectURL(file);
+    const file = this.files[0];
+    // console.dir(file);
+    url = URL.createObjectURL(file);
+    // console.log(url);
+
     $(".user_pic").attr("src", url);
   });
   // 3.编辑用户信息
@@ -31,8 +45,10 @@ $(function() {
       contentType: false,
       processData: false,
       success: function(response) {
-        console.log(response);
-        window.parent.location.reload();
+        // console.log(response);
+        // window.parent.location.reload();
+        parent.$(".user_info img,.user_center_link img").attr("src", url);
+        parent.$(".user_info span").html("欢迎:" + nickname);
       }
     });
   });
