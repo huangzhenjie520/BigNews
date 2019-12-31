@@ -20,7 +20,7 @@ $(function() {
         });
         $(".user_pic").attr("src", data.userPic);
       }
-      console.log(response);
+      // console.log(response);
     }
   });
   //2.文件预览
