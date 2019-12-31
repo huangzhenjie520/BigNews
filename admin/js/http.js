@@ -7,10 +7,10 @@
   //   ajaxSetup() 方法为将来的 AJAX 请求设置默认值。
   $.ajaxSetup({
     beforeSend(xhr) {
-      if (!token) {
-        location.href = "./login.html";
-      }
       if (location.href.indexOf("login.html") === -1) {
+        if (!token) {
+          location.href = "./login.html";
+        }
         xhr.setRequestHeader("Authorization", token);
       }
     }
