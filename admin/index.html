@@ -154,6 +154,10 @@
           }
         });
       });
+      $(".logout").on("click", function() {
+        localStorage.removeItem("token");
+        location.reload();
+      });
     </script>
   </body>
 </html>
