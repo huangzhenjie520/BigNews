@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./libs/bootstrap/css/bootstrap.min.css" />
+    <script src="./libs/jquery-1.12.4.min.js"></script>
+    <script src="./libs/jquery.twbsPagination.js"></script>
+  </head>
+  <body>
+    <input type="text" />
+    <button id="btn">输入页数点击修改</button>
+    <ul id="pagination" class="pagination-sm"></ul>
+    <script>
+      const $pagination = $("#pagination");
+      $("#btn").on("click", function() {
+        const totalPages = $('[type="text"]').val();
+        console.log(totalPages);
+        // resetpage(totalPages);
+      });
+      resetpage();
+      function resetpage(totalPages = 10, startPage = 1) {
+        $pagination.twbsPagination("destroy");
+        $pagination.twbsPagination({
+          first: "首页",
+          prev: "上一页",
+          next: "下一页",
+          last: "尾页",
+          startPage: startPage,
+          totalPages: totalPages,
+          visiblePages: 7,
+          onPageClick: function(event, page) {
+            // $("#page-content").text("Page " + page);
+            console.log(page);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
